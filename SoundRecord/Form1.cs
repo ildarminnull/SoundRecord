@@ -22,6 +22,7 @@ namespace SoundRecord
 		private string fileName = "";
 		private Record rec;
 		private bool _isRecordingStop = true;
+		private bool _isRecordingPlay = false;
 
 
 		public Form1()
@@ -53,7 +54,7 @@ namespace SoundRecord
 
 		private void bRec_Click(object sender, EventArgs e)
 		{
-			if (_isRecordingStop)
+			if (_isRecordingStop & !_isRecordingPlay)
 			{
 				fileName = DateTime.Now.ToString("ddMMy-HHmm");
 				filePath = dirPath + DateTime.Now.Year.ToString() + @"\" + DateTime.Now.ToString("MM");
@@ -64,7 +65,7 @@ namespace SoundRecord
 				rec = new Record();
 				rec.RecordAudio(filePath + @"\", fileName);
 				textBoxLog.Text = "Record start " + DateTime.Now.ToString("dd/MM/yyyy HH:mm");
-				_isRecordingStop = false;
+				_isRecordingPlay = true;
 			}	
 		}
 
@@ -77,8 +78,25 @@ namespace SoundRecord
 
 
 		private void timer1_Tick(object sender, EventArgs e)
-		{
-			labelTest.Text = DateTime.Now.Hour.ToString("00") + ":" + DateTime.Now.Minute.ToString("00") + ":" + DateTime.Now.Second.ToString("00");
+		{			
+			if (_isRecordingPlay) 
+			{
+				labelTest.Text = DateTime.Now.Minute.ToString("00");
+				if (DateTime.Now.Minute.ToString("00") == "43" & DateTime.Now.Second.ToString("00") == "59")
+				{					
+					if (rec != null)
+					{						
+						rec.StopRecording();
+						_isRecordingPlay = false;
+						///					Console.WriteLine("Stop record");
+					}
+				}
+			}
 		}
+
+
+
+
+
 	}
 }

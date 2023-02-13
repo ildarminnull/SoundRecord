@@ -60,6 +60,7 @@ namespace SoundRecord
 		{			
 			/*Остановить аудиозапись*/
 			_waveSource.StopRecording();
+			Console.WriteLine("Stop record");
 		}
 
 		/// <summary>
