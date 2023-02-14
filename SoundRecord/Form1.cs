@@ -20,7 +20,7 @@ namespace SoundRecord
 		private string dirPath = (string)(Settings.Default["Path"]) + @"\";
 		private string filePath = "";
 		private string fileName = "";
-		private Record rec;
+		private Recaudio rec;
 		private bool _isRecordingStop = true;
 		private bool _isRecordingPlay = false;
 
@@ -62,7 +62,7 @@ namespace SoundRecord
 				{
 					Directory.CreateDirectory(filePath);
 				}				
-				rec = new Record();
+				rec = new Recaudio();
 				rec.RecordAudio(filePath + @"\", fileName);
 				textBoxLog.Text = "Record start " + DateTime.Now.ToString("dd/MM/yyyy HH:mm");
 				_isRecordingPlay = true;
@@ -80,18 +80,35 @@ namespace SoundRecord
 		private void timer1_Tick(object sender, EventArgs e)
 		{			
 			if (_isRecordingPlay) 
-			{
-				labelTest.Text = DateTime.Now.Minute.ToString("00");
-				if (DateTime.Now.Minute.ToString("00") == "43" & DateTime.Now.Second.ToString("00") == "59")
+			{				
+				if (DateTime.Now.Minute.ToString("00") == "56" & DateTime.Now.Second.ToString("00") == "59")
 				{					
 					if (rec != null)
 					{						
 						rec.StopRecording();
 						_isRecordingPlay = false;
-						///					Console.WriteLine("Stop record");
 					}
 				}
 			}
+			if (_isRecordingStop)
+			{
+				if (DateTime.Now.Minute.ToString("00") == "57" & DateTime.Now.Second.ToString("00") == "00")
+				{
+					if (rec != null)
+					{
+						fileName = DateTime.Now.ToString("ddMMy-HHmm");
+						filePath = dirPath + DateTime.Now.Year.ToString() + @"\" + DateTime.Now.ToString("MM");
+						if (!Directory.Exists(filePath))
+						{
+							Directory.CreateDirectory(filePath);
+						}
+						//				rec = new Record();
+						rec.RecordAudio(filePath + @"\", fileName);
+						_isRecordingPlay = true;
+					}
+				}
+			}
+
 		}
 
 
