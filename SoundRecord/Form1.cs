@@ -12,6 +12,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
+using ExtendedDotNET.Controls;
+
+
 
 namespace SoundRecord
 {
@@ -24,17 +27,17 @@ namespace SoundRecord
 		private bool _isRecordingStop = true;
 		private bool _isRecordingPlay = false;
 
-
 		public Form1()
 		{
 			InitializeComponent();
-			textBox1Path.Text = (string)(Settings.Default["Path"]);			
+			textBox1Path.Text = (string)(Settings.Default["Path"]);	
 			MMDeviceEnumerator enumerator = new MMDeviceEnumerator();
 			var devices = enumerator.EnumerateAudioEndPoints(DataFlow.All, DeviceState.Active);
 			comboBox1.Items.AddRange(devices.ToArray());
 			timer1.Interval = 1000;
 			timer1.Tick += new EventHandler(timer1_Tick);
 			timer1.Start();
+			comboBox1.SelectedIndex = (int)(Settings.Default["ChannelID"]);
 		}
 
 		private void timer_Tick(object sender, EventArgs e)
@@ -42,7 +45,7 @@ namespace SoundRecord
 			if (comboBox1.SelectedItem != null)
 			{
 				var device = (MMDevice)comboBox1.SelectedItem;
-				progressBar1.Value = (int)(Math.Round(device.AudioMeterInformation.MasterPeakValue * 100));
+				progressBar2.Value = (int)(Math.Round(device.AudioMeterInformation.MasterPeakValue * 100));
 			}
 		}
 
@@ -102,7 +105,6 @@ namespace SoundRecord
 						{
 							Directory.CreateDirectory(filePath);
 						}
-						//				rec = new Record();
 						rec.RecordAudio(filePath + @"\", fileName);
 						_isRecordingPlay = true;
 					}

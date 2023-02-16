@@ -29,8 +29,6 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			this.comboBox1 = new System.Windows.Forms.ComboBox();
-			this.progressBar1 = new System.Windows.Forms.ProgressBar();
 			this.timer = new System.Windows.Forms.Timer(this.components);
 			this.label1 = new System.Windows.Forms.Label();
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -42,25 +40,11 @@
 			this.label4 = new System.Windows.Forms.Label();
 			this.textBox1Path = new System.Windows.Forms.TextBox();
 			this.textBoxLog = new System.Windows.Forms.TextBox();
-			this.labelTest = new System.Windows.Forms.Label();
 			this.timer1 = new System.Windows.Forms.Timer(this.components);
+			this.progressBar2 = new ExtendedDotNET.Controls.Progress.ProgressBar();
+			this.comboBox1 = new System.Windows.Forms.ComboBox();
 			this.menuStrip1.SuspendLayout();
 			this.SuspendLayout();
-			// 
-			// comboBox1
-			// 
-			this.comboBox1.FormattingEnabled = true;
-			this.comboBox1.Location = new System.Drawing.Point(20, 50);
-			this.comboBox1.Name = "comboBox1";
-			this.comboBox1.Size = new System.Drawing.Size(294, 21);
-			this.comboBox1.TabIndex = 0;
-			// 
-			// progressBar1
-			// 
-			this.progressBar1.Location = new System.Drawing.Point(20, 107);
-			this.progressBar1.Name = "progressBar1";
-			this.progressBar1.Size = new System.Drawing.Size(294, 25);
-			this.progressBar1.TabIndex = 1;
 			// 
 			// timer
 			// 
@@ -158,25 +142,59 @@
 			this.textBoxLog.Size = new System.Drawing.Size(386, 20);
 			this.textBoxLog.TabIndex = 10;
 			// 
-			// labelTest
-			// 
-			this.labelTest.AutoSize = true;
-			this.labelTest.Location = new System.Drawing.Point(23, 389);
-			this.labelTest.Name = "labelTest";
-			this.labelTest.Size = new System.Drawing.Size(35, 13);
-			this.labelTest.TabIndex = 11;
-			this.labelTest.Text = "label5";
-			// 
 			// timer1
 			// 
 			this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+			// 
+			// progressBar2
+			// 
+			this.progressBar2.BarOffset = 1;
+			this.progressBar2.Caption = "Progress";
+			this.progressBar2.CaptionColor = System.Drawing.Color.Black;
+			this.progressBar2.CaptionMode = ExtendedDotNET.Controls.Progress.ProgressCaptionMode.Percent;
+			this.progressBar2.CaptionShadowColor = System.Drawing.Color.White;
+			this.progressBar2.ChangeByMouse = false;
+			this.progressBar2.DashSpace = 2;
+			this.progressBar2.DashWidth = 5;
+			this.progressBar2.Edge = ExtendedDotNET.Controls.Progress.ProgressBarEdge.Rounded;
+			this.progressBar2.EdgeColor = System.Drawing.Color.Gray;
+			this.progressBar2.EdgeLightColor = System.Drawing.Color.LightGray;
+			this.progressBar2.EdgeWidth = 1;
+			this.progressBar2.FloodPercentage = 0.2F;
+			this.progressBar2.FloodStyle = ExtendedDotNET.Controls.Progress.ProgressFloodStyle.Standard;
+			this.progressBar2.Invert = false;
+			this.progressBar2.Location = new System.Drawing.Point(20, 113);
+			this.progressBar2.MainColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(255)))), ((int)(((byte)(0)))));
+			this.progressBar2.Maximum = 100;
+			this.progressBar2.Minimum = 0;
+			this.progressBar2.Name = "progressBar2";
+			this.progressBar2.Orientation = ExtendedDotNET.Controls.Progress.ProgressBarDirection.Horizontal;
+			this.progressBar2.ProgressBackColor = System.Drawing.Color.White;
+			this.progressBar2.ProgressBarStyle = ExtendedDotNET.Controls.Progress.ProgressStyle.Dashed;
+			this.progressBar2.SecondColor = System.Drawing.Color.White;
+			this.progressBar2.Shadow = true;
+			this.progressBar2.ShadowOffset = 1;
+			this.progressBar2.Size = new System.Drawing.Size(384, 24);
+			this.progressBar2.Step = 1;
+			this.progressBar2.TabIndex = 11;
+			this.progressBar2.TextAntialias = true;
+			this.progressBar2.Value = 33;
+			// 
+			// comboBox1
+			// 
+			this.comboBox1.FormattingEnabled = true;
+			this.comboBox1.Location = new System.Drawing.Point(20, 47);
+			this.comboBox1.Name = "comboBox1";
+			this.comboBox1.Size = new System.Drawing.Size(384, 21);
+			this.comboBox1.TabIndex = 13;
 			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(421, 450);
-			this.Controls.Add(this.labelTest);
+			this.Controls.Add(this.comboBox1);
+			this.Controls.Add(this.progressBar2);
 			this.Controls.Add(this.textBoxLog);
 			this.Controls.Add(this.textBox1Path);
 			this.Controls.Add(this.label4);
@@ -185,8 +203,6 @@
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.bStop);
 			this.Controls.Add(this.bRec);
-			this.Controls.Add(this.progressBar1);
-			this.Controls.Add(this.comboBox1);
 			this.Controls.Add(this.menuStrip1);
 			this.MainMenuStrip = this.menuStrip1;
 			this.Name = "Form1";
@@ -199,9 +215,6 @@
 		}
 
 		#endregion
-
-		private System.Windows.Forms.ComboBox comboBox1;
-		private System.Windows.Forms.ProgressBar progressBar1;
 		private System.Windows.Forms.Timer timer;
 		private System.Windows.Forms.Button bRec;
 		private System.Windows.Forms.Button bStop;
@@ -213,8 +226,9 @@
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.TextBox textBox1Path;
 		private System.Windows.Forms.TextBox textBoxLog;
-		private System.Windows.Forms.Label labelTest;
 		private System.Windows.Forms.Timer timer1;
+		private ExtendedDotNET.Controls.Progress.ProgressBar progressBar2;
+		private System.Windows.Forms.ComboBox comboBox1;
 	}
 }
 
