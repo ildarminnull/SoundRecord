@@ -33,8 +33,6 @@
 			this.label1 = new System.Windows.Forms.Label();
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.settingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.bStop = new System.Windows.Forms.Button();
-			this.bRec = new System.Windows.Forms.Button();
 			this.label2 = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
 			this.label4 = new System.Windows.Forms.Label();
@@ -43,7 +41,12 @@
 			this.timer1 = new System.Windows.Forms.Timer(this.components);
 			this.progressBar2 = new ExtendedDotNET.Controls.Progress.ProgressBar();
 			this.comboBox1 = new System.Windows.Forms.ComboBox();
+			this.pictureBox1 = new System.Windows.Forms.PictureBox();
+			this.bStop = new System.Windows.Forms.Button();
+			this.bRec = new System.Windows.Forms.Button();
+			this.timerMp3 = new System.Windows.Forms.Timer(this.components);
 			this.menuStrip1.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// timer
@@ -56,7 +59,7 @@
 			// 
 			this.label1.AutoSize = true;
 			this.label1.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label1.Location = new System.Drawing.Point(20, 157);
+			this.label1.Location = new System.Drawing.Point(20, 93);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(95, 26);
 			this.label1.TabIndex = 4;
@@ -80,27 +83,6 @@
 			this.settingToolStripMenuItem.Text = "Setting";
 			this.settingToolStripMenuItem.Click += new System.EventHandler(this.settingToolStripMenuItem_Click);
 			// 
-			// bStop
-			// 
-			this.bStop.Image = global::SoundRecord.Properties.Resources.Stop24;
-			this.bStop.Location = new System.Drawing.Point(155, 153);
-			this.bStop.Name = "bStop";
-			this.bStop.Size = new System.Drawing.Size(28, 30);
-			this.bStop.TabIndex = 3;
-			this.bStop.UseVisualStyleBackColor = true;
-			this.bStop.Click += new System.EventHandler(this.bStop_Click);
-			// 
-			// bRec
-			// 
-			this.bRec.BackgroundImage = global::SoundRecord.Properties.Resources.Rec24;
-			this.bRec.Image = global::SoundRecord.Properties.Resources.Rec24;
-			this.bRec.Location = new System.Drawing.Point(121, 154);
-			this.bRec.Name = "bRec";
-			this.bRec.Size = new System.Drawing.Size(28, 29);
-			this.bRec.TabIndex = 2;
-			this.bRec.UseVisualStyleBackColor = true;
-			this.bRec.Click += new System.EventHandler(this.bRec_Click);
-			// 
 			// label2
 			// 
 			this.label2.AutoSize = true;
@@ -113,7 +95,7 @@
 			// label3
 			// 
 			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(22, 88);
+			this.label3.Location = new System.Drawing.Point(22, 279);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(95, 13);
 			this.label3.TabIndex = 7;
@@ -122,7 +104,7 @@
 			// label4
 			// 
 			this.label4.AutoSize = true;
-			this.label4.Location = new System.Drawing.Point(20, 213);
+			this.label4.Location = new System.Drawing.Point(22, 166);
 			this.label4.Name = "label4";
 			this.label4.Size = new System.Drawing.Size(137, 13);
 			this.label4.TabIndex = 8;
@@ -130,20 +112,21 @@
 			// 
 			// textBox1Path
 			// 
-			this.textBox1Path.Location = new System.Drawing.Point(155, 210);
+			this.textBox1Path.Location = new System.Drawing.Point(155, 163);
 			this.textBox1Path.Name = "textBox1Path";
 			this.textBox1Path.Size = new System.Drawing.Size(254, 20);
 			this.textBox1Path.TabIndex = 9;
 			// 
 			// textBoxLog
 			// 
-			this.textBoxLog.Location = new System.Drawing.Point(23, 273);
+			this.textBoxLog.Location = new System.Drawing.Point(23, 221);
 			this.textBoxLog.Name = "textBoxLog";
 			this.textBoxLog.Size = new System.Drawing.Size(386, 20);
 			this.textBoxLog.TabIndex = 10;
 			// 
 			// timer1
 			// 
+			this.timer1.Interval = 1000;
 			this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
 			// 
 			// progressBar2
@@ -152,29 +135,29 @@
 			this.progressBar2.Caption = "Progress";
 			this.progressBar2.CaptionColor = System.Drawing.Color.Black;
 			this.progressBar2.CaptionMode = ExtendedDotNET.Controls.Progress.ProgressCaptionMode.Percent;
-			this.progressBar2.CaptionShadowColor = System.Drawing.Color.White;
+			this.progressBar2.CaptionShadowColor = System.Drawing.Color.Yellow;
 			this.progressBar2.ChangeByMouse = false;
 			this.progressBar2.DashSpace = 2;
 			this.progressBar2.DashWidth = 5;
 			this.progressBar2.Edge = ExtendedDotNET.Controls.Progress.ProgressBarEdge.Rounded;
-			this.progressBar2.EdgeColor = System.Drawing.Color.Gray;
-			this.progressBar2.EdgeLightColor = System.Drawing.Color.LightGray;
+			this.progressBar2.EdgeColor = System.Drawing.Color.Black;
+			this.progressBar2.EdgeLightColor = System.Drawing.Color.Black;
 			this.progressBar2.EdgeWidth = 1;
 			this.progressBar2.FloodPercentage = 0.2F;
 			this.progressBar2.FloodStyle = ExtendedDotNET.Controls.Progress.ProgressFloodStyle.Standard;
 			this.progressBar2.Invert = false;
-			this.progressBar2.Location = new System.Drawing.Point(20, 113);
+			this.progressBar2.Location = new System.Drawing.Point(12, 348);
 			this.progressBar2.MainColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(255)))), ((int)(((byte)(0)))));
 			this.progressBar2.Maximum = 100;
 			this.progressBar2.Minimum = 0;
 			this.progressBar2.Name = "progressBar2";
 			this.progressBar2.Orientation = ExtendedDotNET.Controls.Progress.ProgressBarDirection.Horizontal;
-			this.progressBar2.ProgressBackColor = System.Drawing.Color.White;
+			this.progressBar2.ProgressBackColor = System.Drawing.Color.Black;
 			this.progressBar2.ProgressBarStyle = ExtendedDotNET.Controls.Progress.ProgressStyle.Dashed;
 			this.progressBar2.SecondColor = System.Drawing.Color.White;
 			this.progressBar2.Shadow = true;
 			this.progressBar2.ShadowOffset = 1;
-			this.progressBar2.Size = new System.Drawing.Size(384, 24);
+			this.progressBar2.Size = new System.Drawing.Size(397, 18);
 			this.progressBar2.Step = 1;
 			this.progressBar2.TabIndex = 11;
 			this.progressBar2.TextAntialias = true;
@@ -188,13 +171,53 @@
 			this.comboBox1.Size = new System.Drawing.Size(384, 21);
 			this.comboBox1.TabIndex = 13;
 			// 
+			// pictureBox1
+			// 
+			this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+			this.pictureBox1.Image = global::SoundRecord.Properties.Resources.ind;
+			this.pictureBox1.InitialImage = null;
+			this.pictureBox1.Location = new System.Drawing.Point(12, 310);
+			this.pictureBox1.Name = "pictureBox1";
+			this.pictureBox1.Size = new System.Drawing.Size(397, 56);
+			this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.pictureBox1.TabIndex = 14;
+			this.pictureBox1.TabStop = false;
+			// 
+			// bStop
+			// 
+			this.bStop.Image = global::SoundRecord.Properties.Resources.Stop24;
+			this.bStop.Location = new System.Drawing.Point(155, 90);
+			this.bStop.Name = "bStop";
+			this.bStop.Size = new System.Drawing.Size(28, 30);
+			this.bStop.TabIndex = 3;
+			this.bStop.UseVisualStyleBackColor = true;
+			this.bStop.Click += new System.EventHandler(this.bStop_Click);
+			// 
+			// bRec
+			// 
+			this.bRec.BackgroundImage = global::SoundRecord.Properties.Resources.Rec24;
+			this.bRec.Image = global::SoundRecord.Properties.Resources.Rec24;
+			this.bRec.Location = new System.Drawing.Point(121, 90);
+			this.bRec.Name = "bRec";
+			this.bRec.Size = new System.Drawing.Size(28, 29);
+			this.bRec.TabIndex = 2;
+			this.bRec.UseVisualStyleBackColor = true;
+			this.bRec.Click += new System.EventHandler(this.bRec_Click);
+			// 
+			// timerMp3
+			// 
+			this.timerMp3.Enabled = true;
+			this.timerMp3.Interval = 1000;
+			this.timerMp3.Tick += new System.EventHandler(this.timerMp3_Tick);
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(421, 450);
-			this.Controls.Add(this.comboBox1);
 			this.Controls.Add(this.progressBar2);
+			this.Controls.Add(this.pictureBox1);
+			this.Controls.Add(this.comboBox1);
 			this.Controls.Add(this.textBoxLog);
 			this.Controls.Add(this.textBox1Path);
 			this.Controls.Add(this.label4);
@@ -209,6 +232,7 @@
 			this.Text = "Form1";
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -227,8 +251,10 @@
 		private System.Windows.Forms.TextBox textBox1Path;
 		private System.Windows.Forms.TextBox textBoxLog;
 		private System.Windows.Forms.Timer timer1;
+		private System.Windows.Forms.PictureBox pictureBox1;
 		private ExtendedDotNET.Controls.Progress.ProgressBar progressBar2;
 		private System.Windows.Forms.ComboBox comboBox1;
+		private System.Windows.Forms.Timer timerMp3;
 	}
 }
 

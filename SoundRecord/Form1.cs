@@ -22,10 +22,14 @@ namespace SoundRecord
 	{
 		private string dirPath = (string)(Settings.Default["Path"]) + @"\";
 		private string filePath = "";
+		private string tempfilePath = "";
 		private string fileName = "";
-		private Recaudio rec;
+		private string tempfile = "";
+		private Recaudio rec = new Recaudio();
+		private Recaudio rec1 = new Recaudio();
 		private bool _isRecordingStop = true;
 		private bool _isRecordingPlay = false;
+		
 
 		public Form1()
 		{
@@ -60,12 +64,14 @@ namespace SoundRecord
 			if (_isRecordingStop & !_isRecordingPlay)
 			{
 				fileName = DateTime.Now.ToString("ddMMy-HHmm");
+				tempfile = fileName;
 				filePath = dirPath + DateTime.Now.Year.ToString() + @"\" + DateTime.Now.ToString("MM");
 				if (!Directory.Exists(filePath))
 				{
 					Directory.CreateDirectory(filePath);
-				}				
-				rec = new Recaudio();
+				}
+				tempfilePath = filePath;
+			//	rec = new Recaudio();
 				rec.RecordAudio(filePath + @"\", fileName);
 				textBoxLog.Text = "Record start " + DateTime.Now.ToString("dd/MM/yyyy HH:mm");
 				_isRecordingPlay = true;
@@ -74,9 +80,17 @@ namespace SoundRecord
 
 		private void bStop_Click(object sender, EventArgs e)
 		{			
-			if (rec != null) { rec.StopRecording(); }			
+			if (_isRecordingPlay)  
+			{
+				tempfile = fileName;
+				tempfilePath = filePath;
+				rec.StopRecording();
+				if (File.Exists($"{(tempfilePath + @"\" + tempfile)}.wav"))
+				{
+					rec.ConvertWaveToMp3($"{(tempfilePath + @"\" + tempfile)}.wav", tempfilePath + @"\" + tempfile + ".mp3");
+				}				
+			}
 			_isRecordingStop = true;
-			Console.WriteLine(DateTime.Now.ToString("ddMMy-HHmm"));
 		}
 
 
@@ -84,21 +98,16 @@ namespace SoundRecord
 		{			
 			if (_isRecordingPlay) 
 			{				
-				if (DateTime.Now.Minute.ToString("00") == "56" & DateTime.Now.Second.ToString("00") == "59")
+				if (DateTime.Now.Minute.ToString("00") == "00" & DateTime.Now.Second.ToString("00") == "00")
 				{					
 					if (rec != null)
 					{						
 						rec.StopRecording();
 						_isRecordingPlay = false;
-					}
-				}
-			}
-			if (_isRecordingStop)
-			{
-				if (DateTime.Now.Minute.ToString("00") == "57" & DateTime.Now.Second.ToString("00") == "00")
-				{
-					if (rec != null)
-					{
+						tempfile = fileName;
+						tempfilePath = filePath;
+						Console.WriteLine($"{(tempfilePath + @"\" + tempfile)}.wav" + " - 1");
+
 						fileName = DateTime.Now.ToString("ddMMy-HHmm");
 						filePath = dirPath + DateTime.Now.Year.ToString() + @"\" + DateTime.Now.ToString("MM");
 						if (!Directory.Exists(filePath))
@@ -107,15 +116,22 @@ namespace SoundRecord
 						}
 						rec.RecordAudio(filePath + @"\", fileName);
 						_isRecordingPlay = true;
+						Thread.Sleep(1000);
 					}
 				}
 			}
 
 		}
 
-
-
-
-
+		private void timerMp3_Tick(object sender, EventArgs e)
+		{
+			if (DateTime.Now.Minute.ToString("00") == "00" & DateTime.Now.Second.ToString("00") == "02")
+			{
+				if (File.Exists($"{(tempfilePath + @"\" + tempfile)}.wav"))
+				{
+					rec.ConvertWaveToMp3($"{(tempfilePath + @"\" + tempfile)}.wav", tempfilePath + @"\" + tempfile + ".mp3");
+				}
+			}
+		}
 	}
 }

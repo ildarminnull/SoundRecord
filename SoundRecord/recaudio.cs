@@ -57,13 +57,13 @@ namespace SoundRecord
 				waveWriter.Dispose();
 				waveWriter = null;
 			}
-			ConvertWaveToMp3(_tempFilename, _path + _filename + ".mp3");
+	//		ConvertWaveToMp3(_tempFilename, _path + _filename + ".mp3");
 		}
 
 		/// <summary>
 		/// Преобразует записанный файл WAV в MP3.
 		/// </summary>
-		private void ConvertWaveToMp3(string source, string destination)
+		public void ConvertWaveToMp3(string source, string destination)
 		{
 			using (var waveStream = new WaveFileReader(source))
 			using (var fileWriter = new LameMP3FileWriter(destination, waveStream.WaveFormat, 128))

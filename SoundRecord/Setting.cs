@@ -15,7 +15,7 @@ namespace SoundRecord
 {
 	public partial class Setting : Form
 	{
-		string channel = "";
+///		string channel = "";
 		int channelID;
 
 		public Setting()
@@ -25,7 +25,7 @@ namespace SoundRecord
 			var devices = enumerator.EnumerateAudioEndPoints(DataFlow.All, DeviceState.Active);
 			comboBoxChannel.Items.AddRange(devices.ToArray());
 			textBoxPath.Text = (string)(Settings.Default["Path"]);
-			channel = comboBoxChannel.Text;
+//			channel = comboBoxChannel.Text;
 			comboBoxChannel.SelectedIndex = (int)(Settings.Default["ChannelID"]);
 
 		}
