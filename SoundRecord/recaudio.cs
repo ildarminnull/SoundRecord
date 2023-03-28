@@ -56,8 +56,7 @@ namespace SoundRecord
 			{
 				waveWriter.Dispose();
 				waveWriter = null;
-			}
-	//		ConvertWaveToMp3(_tempFilename, _path + _filename + ".mp3");
+			}	
 		}
 
 		/// <summary>
