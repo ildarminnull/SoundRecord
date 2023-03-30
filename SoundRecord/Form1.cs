@@ -86,7 +86,6 @@ namespace SoundRecord
 					Directory.CreateDirectory(filePath);
 				}
 				tempfilePath = filePath;
-			//	rec = new Recaudio();
 				rec.RecordAudio(filePath + @"\", fileName);
 				textBoxLog.Text = "Record start " + DateTime.Now.ToString("dd/MM/yyyy HH:mm");
 				_isRecordingPlay = true;				
@@ -100,14 +99,12 @@ namespace SoundRecord
 				tempfile = fileName;
 				tempfilePath = filePath;
 				rec.StopRecording();
-				Console.WriteLine("Stop");
 				if (File.Exists($"{(tempfilePath + @"\" + tempfile)}.wav"))
 				{
 					await Convert();
-//					ConvertWaveToMp3($"{(tempfilePath + @"\" + tempfile)}.wav", tempfilePath + @"\" + tempfile + ".mp3");
 				}				
 			}
-			_isRecordingStop = true;
+			_isRecordingStop = false;
 		}
 
 
@@ -120,11 +117,8 @@ namespace SoundRecord
 					if (rec != null)
 					{						
 						rec.StopRecording();
-					//	_isRecordingPlay = false;
 						tempfile = fileName;
 						tempfilePath = filePath;
-						Console.WriteLine($"{(tempfilePath + @"\" + tempfile)}.wav" + " - 1");
-
 						fileName = DateTime.Now.ToString("ddMMy-HHmm");
 						filePath = dirPath + DateTime.Now.Year.ToString() + @"\" + DateTime.Now.ToString("MM") + @"\" + DateTime.Now.ToString("dd");
 						if (!Directory.Exists(filePath))
@@ -146,9 +140,8 @@ namespace SoundRecord
 			{
 				if (File.Exists($"{(tempfilePath + @"\" + tempfile)}.wav"))
 				{
-					Console.WriteLine("Convert");
 					await Convert();
-	//				ConvertWaveToMp3($"{(tempfilePath + @"\" + tempfile)}.wav", tempfilePath + @"\" + tempfile + ".mp3");
+					Thread.Sleep(1000);
 				}
 			}
 		}
