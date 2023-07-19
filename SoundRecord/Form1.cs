@@ -31,7 +31,8 @@ namespace SoundRecord
 		private Recaudio recMP = new Recaudio();
 		private bool _isRecordingStop = true;
 		private bool _isRecordingPlay = false;
-		
+		private bool _isMP3 = true;
+
 
 		public Form1()
 		{
@@ -57,6 +58,7 @@ namespace SoundRecord
 
 			/*Delete the temporary WAV file*/
 			File.Delete(source);
+			_isMP3 = true;
 		}
 
 		private void timer_Tick(object sender, EventArgs e)
@@ -112,7 +114,7 @@ namespace SoundRecord
 		{			
 			if (_isRecordingPlay) 
 			{				
-				if (DateTime.Now.Minute.ToString("00") == "00" & DateTime.Now.Second.ToString("00") == "00")
+				if (DateTime.Now.Minute.ToString("00") == "35" & DateTime.Now.Second.ToString("00") == "00")
 				{					
 					if (rec != null)
 					{						
@@ -136,12 +138,15 @@ namespace SoundRecord
 
 		private async void timerMp3_Tick(object sender, EventArgs e)
 		{
-			if (DateTime.Now.Minute.ToString("00") == "00" & DateTime.Now.Second.ToString("00") == "05")
+			if (_isMP3)
 			{
-				if (File.Exists($"{(tempfilePath + @"\" + tempfile)}.wav"))
+				if (DateTime.Now.Minute.ToString("00") == "35" & DateTime.Now.Second.ToString("00") == "05")
 				{
-					await Convert();
-					Thread.Sleep(1000);
+					if (File.Exists($"{(tempfilePath + @"\" + tempfile)}.wav"))
+					{
+						_isMP3 = false;
+						await Convert();						
+					}
 				}
 			}
 		}

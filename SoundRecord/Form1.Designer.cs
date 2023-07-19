@@ -207,7 +207,7 @@
 			// timerMp3
 			// 
 			this.timerMp3.Enabled = true;
-			this.timerMp3.Interval = 1000;
+			this.timerMp3.Interval = 500;
 			this.timerMp3.Tick += new System.EventHandler(this.timerMp3_Tick);
 			// 
 			// Form1
